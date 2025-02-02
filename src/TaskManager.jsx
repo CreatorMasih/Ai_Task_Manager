@@ -27,7 +27,7 @@ const TaskManager = () => {
     const fetchTasks = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:5000/tasks');
+            const response = await axios.get('https://ai-task-manager-cupj.onrender.com/tasks');
             const sortedTasks = response.data.sort((a, b) => {
                 const priorityOrder = { "High": 1, "Medium": 2, "Low": 3 };
                 return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -45,7 +45,7 @@ const TaskManager = () => {
         if (!description) return;
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/tasks', { description });
+            const response = await axios.post('https://ai-task-manager-cupj.onrender.com/tasks', { description });
             setTasks([...tasks, response.data].sort((a, b) => {
                 const priorityOrder = { "High": 1, "Medium": 2, "Low": 3 };
                 return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -63,7 +63,7 @@ const TaskManager = () => {
         if (!newDescription) return;
         setLoading(true);
         try {
-            const response = await axios.put(`http://localhost:5000/tasks/${id}`, { description: newDescription });
+            const response = await axios.put(`https://ai-task-manager-cupj.onrender.com/tasks/${id}`, { description: newDescription });
             
             // Update the task in the local state without re-fetching
             setTasks(prevTasks => 
@@ -82,7 +82,7 @@ const TaskManager = () => {
     const deleteTask = async (id) => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:5000/tasks/${id}`);
+            await axios.delete(`https://ai-task-manager-cupj.onrender.com/tasks/${id}`);
             setTasks(tasks.filter(task => task._id !== id));
         } catch (error) {
             setError("Failed to delete task.");
